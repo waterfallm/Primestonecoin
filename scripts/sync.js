@@ -105,9 +105,6 @@ function is_locked(cb) {
   } 
 }
 
-// unlink lock file 
-process.on('uncaughtException', exit);
-
 function exit() {
   remove_lock(function(){
     mongoose.disconnect();
@@ -128,7 +125,7 @@ is_locked(function (exists) {
   } else {
     create_lock(function (){
       console.log("script launched with pid: " + process.pid);
-      mongoose.connect(dbString, function(err) {
+      mongoose.connect(dbString , { useNewUrlParser: true }, function(err) {
         if (err) {
           console.log('Unable to connect to database: %s', dbString);
           console.log('Aborting');
@@ -163,7 +160,9 @@ is_locked(function (exists) {
                               db.update_richlist('balance', function(){
                                 db.get_stats(settings.coin, function(nstats){
                                   console.log('reindex complete (block: %s)', nstats.last);
-                                  exit();
+                                  db.update_cronjob_run(settings.coin,{list_blockchain_update: Math.floor(new Date() / 1000)}, function(cb) {
+                                    exit();
+                                    });
                                 });
                               });
                             });
@@ -175,7 +174,9 @@ is_locked(function (exists) {
                     db.update_tx_db(settings.coin, 1, stats.count, settings.check_timeout, function(){
                       db.get_stats(settings.coin, function(nstats){
                         console.log('check complete (block: %s)', nstats.last);
-                        exit();
+                        db.update_cronjob_run(settings.coin,{list_blockchain_update: Math.floor(new Date() / 1000)}, function(cb) {
+                          exit();
+                          });
                       });
                     });
                   } else if (mode == 'update') {
@@ -184,7 +185,9 @@ is_locked(function (exists) {
                         db.update_richlist('balance', function(){
                           db.get_stats(settings.coin, function(nstats){
                             console.log('update complete (block: %s)', nstats.last);
-                            exit();
+                            db.update_cronjob_run(settings.coin,{list_blockchain_update: Math.floor(new Date() / 1000)}, function(cb) {
+                              exit();
+                              });
                           });
                         });
                       });
@@ -207,13 +210,17 @@ is_locked(function (exists) {
                     console.log('%s market data updated successfully.', mkt);
                     complete++;
                     if (complete == markets.length) {
-                      exit();
+                      db.update_cronjob_run(settings.coin,{list_market_update: Math.floor(new Date() / 1000)}, function(cb) {
+                        exit();
+                        });
                     }
                   } else {
                     console.log('%s: %s', mkt, err);
                     complete++;
                     if (complete == markets.length) {
-                      exit();
+                      db.update_cronjob_run(settings.coin,{list_market_update: Math.floor(new Date() / 1000)}, function(cb) {
+                        exit();
+                        });
                     }
                   }
                 });
