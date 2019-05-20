@@ -1,20 +1,21 @@
-Diquidus, a DSTRA (v2) Block Explorer - v1.0
+PrimeStone Block Explorer - v2.0
 ================
 
-The DSTRA block explorer.
+The PrimeStone Block Explorer
 
-This project is a fork of [Iquidus Explorer](https://github.com/iquidus/explorer) so massive thanks go out to Luke Williams for his code. Further development was derived from [Ciquidus Explorer](https://github.com/suprnudr/ciquidus)! Thank you!!!
+The PrimeStone Coin (PSC) [PoS/MN] [without ICO]
+The PrimeStone Project is a fork of Bitcoin. Further development was derived from PIVX. 
 
 ### See it in action
 
-*  [explorer.dstra.io](https://explorer.dstra.io)
+*  [primestone-explorer.com](http://primestone-explorer.com/)
 
 
 ### Requires
 
 *  node.js >= 0.10.28
 *  mongodb 2.6.x
-*  dstrad, dstra-cli
+*  primestoned, primestone-cli
 
 ### Create database
 
@@ -28,15 +29,15 @@ Create databse:
 
 Create user with read/write access:
 
-    > db.createUser( { user: "diquidus", pwd: "dstra", roles: [ "readWrite" ] } )
+    > db.createUser( { user: "diquidus", pwd: "primestone", roles: [ "readWrite" ] } )
 
 *note: If you're using mongo shell 2.4.x, use the following to create your user:
 
-    > db.addUser( { user: "diquidus", pwd: "dstra", roles: [ "readWrite"] })
+    > db.addUser( { user: "diquidus", pwd: "primestone", roles: [ "readWrite"] })
 
 ### Get the source
 
-    git clone https://github.com/DSTRACoin/diquidus explorer
+    git clone https://github.com/Primestonecoin/explorer.git 
 
 ### Install node modules
 
@@ -56,7 +57,7 @@ Create user with read/write access:
 
 *note: mongod must be running to start the explorer*
 
-As of version 1.4.0 the explorer defaults to cluster mode, forking an instance of its process to each cpu core. This results in increased performance and stability. Load balancing gets automatically taken care of and any instances that for some reason die, will be restarted automatically. For testing/development (or if you just wish to) a single instance can be launched with
+As of version 2.0 the explorer defaults to cluster mode, forking an instance of its process to each cpu core. This results in increased performance and stability. Load balancing gets automatically taken care of and any instances that for some reason die, will be restarted automatically. For testing/development (or if you just wish to) a single instance can be launched with
 
     node --stack-size=10000 bin/instance
 
@@ -110,9 +111,7 @@ The wallet connected to Diquidus must be running with atleast the following flag
 
 ### Donate
     
-    DST: D9uKDZxndukJsvNJxxU7bhi2fhXLZ7AhwQ
-    BTC: 3LjfMHcNnUt46mbQifvHfLTUPQW583NV41
-    ETH: 0x550f1702477EcdB78E66a8B8eC963D23f3CC704c
+   BTC 3M4aGDFj7KNv1KmkTcNuk3rTWbAXfSSS4x
 
 ### Known Issues
 **Database Querys are slow.**
@@ -148,35 +147,6 @@ Where [SIZE] is an integer higher than the default.
 
 *note: SIZE will depend on which blockchain you are using, you may need to play around a bit to find an optimal setting*
 
-### License
 
-Copyright (c) 2018, DSTRA  
-Copyright (c) 2017, The Chaincoin Community  
-Copyright (c) 2015, Iquidus Technology  
-Copyright (c) 2015, Luke Williams  
-All rights reserved.
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
 
-* Redistributions of source code must retain the above copyright notice, this
-  list of conditions and the following disclaimer.
-
-* Redistributions in binary form must reproduce the above copyright notice,
-  this list of conditions and the following disclaimer in the documentation
-  and/or other materials provided with the distribution.
-
-* Neither the name of Iquidus Technology nor the names of its
-  contributors may be used to endorse or promote products derived from
-  this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
