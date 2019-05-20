@@ -29,11 +29,11 @@ Create databse:
 
 Create user with read/write access:
 
-    > db.createUser( { user: "diquidus", pwd: "primestone", roles: [ "readWrite" ] } )
+    > db.createUser( { user: "xyz", pwd: "primestone", roles: [ "readWrite" ] } )
 
 *note: If you're using mongo shell 2.4.x, use the following to create your user:
 
-    > db.addUser( { user: "diquidus", pwd: "primestone", roles: [ "readWrite"] })
+    > db.addUser( { user: "xyz", pwd: "primestone", roles: [ "readWrite"] })
 
 ### Get the source
 
