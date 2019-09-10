@@ -14,7 +14,22 @@ var express = require('express')
   , i18Backend = require('i18next-node-fs-backend')
   , request = require('request');
 
+// Add this section code to here
+var forceSSL = require('express-force-ssl');
+var https = require('https');
+var fs = require('fs');
+var ssl_options = {
+  key: fs.readFileSync('./cert/server.key'),
+  cert: fs.readFileSync('./cert/server.crt'),
+  ca: fs.readFileSync('./cert/server.ca')
+};
+// Add this section code to here
+
 var app = express();
+
+// Add this section code to here
+var secureServer = https.createServer(ssl_options, app);
+// Add this section code to here
 
 // chaincoinapi
 chaincoinapi.setWalletDetails(settings.wallet);
@@ -217,5 +232,8 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
+// Add below line here
+secureServer.listen(443);
 
 module.exports = app;
